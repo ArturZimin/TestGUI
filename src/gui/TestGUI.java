@@ -1,10 +1,14 @@
-package by.zimin;
+package gui;
 
+import com.jtattoo.plaf.aero.AeroLookAndFeel;
 import com.jtattoo.plaf.hifi.HiFiLookAndFeel;
+import com.jtattoo.plaf.luna.LunaLookAndFeel;
 import listeners.CalcButtonActionListener;
 import listeners.CalcTextFieldFocusListener;
+import listeners.ChangeSkinActionListener;
 
 import javax.swing.*;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.awt.*;
 
 public class TestGUI {
@@ -15,6 +19,10 @@ public class TestGUI {
     private MyJButton btnSubtract;
     private MyJButton btnDivide;
     private MyJButton btnMultiply;
+    private MyJButton btnChangesSkin;
+    private MyJButton btnChangesSkin2;
+    private MyJButton btnChangesSkin3;
+
 
     private JLabel labelChislo1;
     private JLabel labelChislo2;
@@ -55,7 +63,7 @@ public class TestGUI {
         testGUI.createButton();
         testGUI.createPanels();
         testGUI.createFrame();
-
+        testGUI.creatSkinListeners();
 
     }
 
@@ -65,6 +73,11 @@ public class TestGUI {
         btnSubtract = new MyJButton("Minus '-'");
         btnDivide = new MyJButton("Divide '/'");
         btnMultiply = new MyJButton("Multiply '*'");
+
+        btnChangesSkin = new MyJButton("Aero skin");
+        btnChangesSkin2 = new MyJButton("Metal skin");
+        btnChangesSkin3 = new MyJButton("Luna skin");
+
 
         addButtonListeners();
 
@@ -80,7 +93,7 @@ public class TestGUI {
         myJTextChislo1 = new MyJTextField(INPUT_NUMBER, 10);//cоздается текстовое поле с шириной 10
         myJTextChislo2 = new MyJTextField(INPUT_NUMBER, 10);
 
-        myJTextResult = new MyJTextField(10, Color.RED);//создается 3 текстовое поле шир15 с цветом
+        myJTextResult = new MyJTextField(20, Color.RED);//создается 3 текстовое поле шир15 с цветом
         myJTextResult.setEditable(false);//нельзя редактировать
         myJTextResult.setFocusable(false);//нельзя на негосчелкнуть мышкой
 
@@ -88,7 +101,7 @@ public class TestGUI {
     }
 
 
-    private void createPanels() {
+    private void createPanels() {//will be three containers
         panel1 = new MyJPanel("Panel1", 100, 100);//создается панел
         panel1.setPreferredSize(new Dimension(200, 50));//задается предпочитаемый размер
         panel1.setLayout(new FlowLayout(FlowLayout.LEFT));//указываем менеджер расположения встроку(Flow) ,
@@ -116,13 +129,17 @@ public class TestGUI {
 
         result.add(labelResult);
         result.add(myJTextResult);
+        result.add(btnChangesSkin);
+        result.add(btnChangesSkin2);
+        result.add(btnChangesSkin3);
+
     }
 
     private void createFrame() {
         /**
          * создается фрэйм (главный контейнер) ,указывается размер в пикселях
          */
-        frame = new MyJFrame("My first app Calculate ", 530, 250, new BorderLayout(2, 2));//2 расстояние между контейнерами(panels)
+        frame = new MyJFrame("My new app Calculate from Artur Zimin ", 590, 250, new BorderLayout(2, 2));//2 расстояние между контейнерами(panels)
         frame.setMinimumSize(new Dimension(530, 250));//чтобы нельзя было уменьшить размер меньше заданного
 
         frame.setResizable(false);//запретить изменять размер окна и убирает кнопку развернуть
@@ -152,6 +169,13 @@ public class TestGUI {
     private void addTextFieldListeners() {
         myJTextChislo1.addFocusListener(new CalcTextFieldFocusListener(myJTextChislo1));
         myJTextChislo2.addFocusListener(new CalcTextFieldFocusListener(myJTextChislo2));
+
+    }
+
+    private void creatSkinListeners() {
+        btnChangesSkin.addActionListener(new ChangeSkinActionListener(frame, new AeroLookAndFeel()));
+        btnChangesSkin2.addActionListener(new ChangeSkinActionListener(frame, new MetalLookAndFeel()));
+        btnChangesSkin3.addActionListener(new ChangeSkinActionListener(frame, new LunaLookAndFeel()));
 
     }
 

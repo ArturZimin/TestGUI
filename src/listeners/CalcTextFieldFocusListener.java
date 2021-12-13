@@ -1,7 +1,7 @@
 package listeners;
 
-import by.zimin.MyJTextField;
-import by.zimin.TestGUI;
+import gui.MyJTextField;
+import gui.TestGUI;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;

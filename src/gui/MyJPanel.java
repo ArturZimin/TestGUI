@@ -1,4 +1,4 @@
-package by.zimin;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
